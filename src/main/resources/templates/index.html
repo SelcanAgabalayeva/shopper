@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <div id="wrapper" class="container">
+        <section class="homepage-slider" id="home-slider">
+            <div class="flexslider">
+                <ul class="slides">
+                    <th:block th:each="slider : ${sliders}">
+                        <li>
+                            <img th:src="@{${slider.imageUrl}}" alt=""/>
+                            <div class="intro" th:if="${slider.title != null}">
+                                <h1 th:text="${slider.title}"></h1>
+                                <p><span th:text="${slider.subtitle}"></span></p>
+                                <p><span th:text="${slider.description}"></span></p>
+                            </div>
+                        </li>
+                    </th:block>
+                </ul>
+            </div>
+        </section>
+
+    <section class="header_text">
+        We stand for top quality templates. Our genuine developers always optimized bootstrap commercial templates.
+        <br/>Don't miss to use our cheap abd best bootstrap templates.
+    </section>
+    <section class="main-content">
+        <div class="row">
+            <div class="span12">
+                <div class="row">
+                    <div class="span12">
+                        <h4 class="title">
+                            <span class="pull-left"><span class="text"><span class="line">Feature <strong>Products</strong></span></span></span>
+                            <span class="pull-right">
+										<a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
+									</span>
+                        </h4>
+                        <div id="myCarousel" class="myCarousel carousel slide">
+                            <div class="carousel-inner">
+                                <div class="active item" >
+                                    <ul class="thumbnails">
+                                        <th:block th:each="product, iterStat : ${featuredProducts}">
+                                            <th:block th:if="${iterStat.index >=0 && iterStat.index < 4}">
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <span class="sale_tag"></span>
+                                                <p><a th:href="'/products/detail/'+${product.id}"><img  th:src="@{${product.imageUrl}}" alt="" /></a></p>
+                                                <a href="/product_detail" class="title" th:text="${product.title}" >Ut wisi enim ad</a><br/>
+                                                <a href="/products" class="category"  th:text="${product.category.name}" >Commodo consequat</a>
+                                                <p class="price" th:text="'$' + ${product.price}">$17.25</p>
+                                            </div>
+                                        </li>
+                                        </th:block>
+                                        </th:block>
+                                    </ul>
+                                </div>
+                                <div class="item">
+                                    <ul class="thumbnails">
+                                        <th:block th:each="product, iterStat : ${featuredProducts}">
+                                            <th:block th:if="${iterStat.index >= 4 && iterStat.index < 8}">
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <p><a th:href="'/products/detail/'+${product.id}"><img th:src="@{${product.imageUrl}}" alt="" /></a></p>
+                                                <a href="/product_detail" class="title" th:text="${product.title}">Know exactly</a><br/>
+                                                <a href="/products" class="category"  th:text="${product.category.name}" >Quis nostrud</a>
+                                                <p class="price" th:text="'$' + ${product.price}">$22.30</p>
+                                            </div>
+                                        </li>
+                                        </th:block>
+                                        </th:block>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <br/>
+                <div class="row">
+                    <div class="span12">
+                        <h4 class="title">
+                            <span class="pull-left"><span class="text"><span class="line">Latest <strong>Products</strong></span></span></span>
+                            <span class="pull-right">
+										<a class="left button" href="#myCarousel-2" data-slide="prev"></a><a class="right button" href="#myCarousel-2" data-slide="next"></a>
+									</span>
+                        </h4>
+                        <div id="myCarousel-2" class="myCarousel carousel slide">
+                            <div class="carousel-inner">
+                                <div class="active item">
+                                    <ul class="thumbnails">
+                                        <th:block th:each="product, iterSta : ${latestProducts}">
+                                            <th:block th:if="${iterSta.index < 4 and !product.isFeatured}">
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <span class="sale_tag"></span>
+                                                <p><a th:href="'/products/detail/'+${product.id}"><img th:src="@{${product.imageUrl}}" alt="" /></a></p>
+                                                <a href="/product_detail" class="title" th:text="${product.title}">Ut wisi enim ad</a><br/>
+                                                <a href="/products" class="category" th:text="${product.category.name}">Commodo consequat</a>
+                                                <p class="price"  th:text="'$' + ${product.price}">$25.50</p>
+                                            </div>
+                                        </li>
+                                            </th:block>
+                                        </th:block>
+                                    </ul>
+                                </div>
+                                <div class="item">
+                                    <ul class="thumbnails">
+                                        <th:block th:each="product, iterSta : ${latestProducts}">
+                                            <th:block th:if="${iterSta.index >= 4 && iterSta.index < 8and !product.isFeatured}">
+                                        <li class="span3">
+                                            <div class="product-box">
+                                                <p><a th:href="'/products/detail/'+${product.id}"><img th:src="@{${product.imageUrl}}" alt="" /></a></p>
+                                                <a href="/product_detail" class="title" th:text="${product.title}">You think water</a><br/>
+                                                <a href="/products"  th:text="${product.category.name}" class="category">World once</a>
+                                                <p class="price"  th:text="'$' + ${product.price}">$45.30</p>
+                                            </div>
+                                        </li>
+                                            </th:block>
+                                        </th:block>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div   class="row feature_box">
+                    <div th:each="box : ${boxs}" class="span4">
+                        <div class="service">
+                            <div class="responsive">
+                                <img th:src="${box.imageUrl}" alt="" width="50px" />
+                                <h4 th:text="${box.firstTitle}">MODERN <strong th:text="${box.secondTitle}">DESIGN</strong></h4>
+                                <p th:text="${box.description}">Lorem Ipsum is simply dummy text of the printing and printing industry unknown printer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="our_client">
+        <h4 class="title"><span class="text">Manufactures</span></h4>
+        <div class="row">
+            <div class="span2" th:each="brand : ${brands}">
+                <a href="#"><img alt="" th:src="${brand.imageUrl}"></a>
+            </div>
+
+        </div>
+    </section>
+    </div>
+</div>
+
+</body>
+</html>

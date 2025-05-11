@@ -1,0 +1,34 @@
+package az.edu.itbrains.shopper.controllers;
+
+import az.edu.itbrains.shopper.dtos.RegisterDto;
+import az.edu.itbrains.shopper.services.UserService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+
+@Controller
+@RequiredArgsConstructor
+public class LoginController {
+    private final UserService userService;
+    @GetMapping("/register")
+    public String register() {
+        return "register.html";
+    }
+    @PostMapping("/register")
+    public String register(RegisterDto registerDto) {
+        boolean result=userService.registerUser(registerDto);
+        if(result){
+            return "redirect:/register";
+        }
+        return "redirect:/register";
+
+    }
+    @GetMapping("/login")
+    public String login() {
+        return "register.html";
+
+    }
+
+}
+

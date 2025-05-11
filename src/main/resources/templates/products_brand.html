@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{layout}">
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+<div layout:fragment="content">
+    <section class="header_text sub">
+        <img class="pageBanner" src="/front/themes/images/pageBanner.png" alt="New products" >
+        <h4><span>New products</span></h4>
+    </section>
+    <section class="main-content">
+
+        <div class="row">
+            <div class="span9">
+                <ul class="thumbnails listing-products">
+                    <li class="span3" th:each="product : ${products}">
+                        <div class="product-box">
+                            <a th:href="'/products/detail/'+${product.id}">
+                                <img th:src="@{${product.imageUrl}}" alt="" />
+                            </a><br/>
+                            <a th:href="@{'/product_detail/' + ${product.id}}" class="title" th:text="${product.title}">Product Name</a><br/>
+                            <p class="price" th:text="${'$' + product.price}">$0</p>
+                        </div>
+                    </li>
+                </ul>
+
+                <hr>
+                <div class="pagination pagination-small pagination-centered">
+                    <ul>
+                        <li th:if="${currentPage > 0}">
+                            <a th:href="@{'/products/brand/' + ${brandId} + '?page=' + ${currentPage - 1}}">Prev</a>
+                        </li>
+                        <li th:each="i : ${#numbers.sequence(0, totalPages - 1)}"
+                            th:classappend="${i == currentPage} ? 'active'">
+                            <a th:href="@{'/products/brand/' + ${brandId} + '?page=' + ${i}}"
+                               th:text="${i + 1}">1</a>
+                        </li>
+                        <li th:if="${currentPage < totalPages - 1}">
+                            <a th:href="@{'/products/brand/' + ${brandId} + '?page=' + ${currentPage + 1}}">Next</a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+            <div class="span3 col">
+                <div class="block">
+                    <ul class="nav nav-list below">
+                        <li class="nav-header">MANUFACTURES</li>
+                        <li th:each="brand : ${brands}">
+                            <a th:href="@{'/products/brand/' + ${brand.id}}" th:text="${brand.name}"></a>
+                        </li>
+                    </ul>
+
+
+                </div>
+                <div class="block">
+                    <h4 class="title">
+                        <span class="pull-left"><span class="text">Randomize</span></span>
+                        <span class="pull-right">
+									<a class="left button" href="#myCarousel" data-slide="prev"></a><a class="right button" href="#myCarousel" data-slide="next"></a>
+								</span>
+                    </h4>
+                    <div id="myCarousel" class="carousel slide">
+                        <div class="carousel-inner">
+                            <div class="active item">
+                                <ul class="thumbnails listing-products">
+                                    <li class="span3">
+                                        <div class="product-box">
+                                            <span class="sale_tag"></span>
+                                            <img alt="" src="/front/themes/images/ladies/1.jpg"><br/>
+                                            <a href="/product_detail" class="title">Fusce id molestie massa</a><br/>
+                                            <a href="#" class="category">Suspendisse aliquet</a>
+                                            <p class="price">$261</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="item">
+                                <ul class="thumbnails listing-products">
+                                    <li class="span3">
+                                        <div class="product-box">
+                                            <img alt="" src="/front/themes/images/ladies/2.jpg"><br/>
+                                            <a href="/product_detail" class="title">Tempor sem sodales</a><br/>
+                                            <a href="#" class="category">Urna nec lectus mollis</a>
+                                            <p class="price">$134</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="block">
+                    <h4 class="title"><strong>Best</strong> Seller</h4>
+                    <ul class="small-product">
+                        <li>
+<!--                            <a th:href="${product.imageUrl}" title="Praesent tempor sem sodales">-->
+<!--                                <img th:src="@{${product.imageUrl}}" alt="Praesent tempor sem sodales">-->
+<!--                            </a>-->
+                            <a href="#">Praesent tempor sem</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+</body>
+</html>
+
+
