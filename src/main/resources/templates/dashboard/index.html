@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .welcome-section {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+                    url('/admin/img/360_F_535138292_62ZnI4Hcw37J8Jaeg4E9TzJwUciCwSnp.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 100px 100px;
+
+  color: yellow;
+  border-radius: 10px;
+  margin-top: 20px;
+}
+
+
+
+    </style>
+</head>
+<body >
+<div layout:fragment="body" >
+
+    <h1 class="container-fluid welcome-section">Admin sehifesine xos gelmisiz</h1>
+
+</div>
+
+</body>
+</html>

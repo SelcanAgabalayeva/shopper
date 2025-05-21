@@ -41,31 +41,30 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public void addToCart(CartItemDto itemDto) {
-        try {
-            Cart cart = new Cart();
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = userRepository.findByUsername(username);
 
+        Product product = productRepository.findById(itemDto.getProductId())
+                .orElseThrow(() -> new RuntimeException("Product not found"));
+
+        Cart existing = cartRepository.findByUserAndProduct(user, product);
+        if (existing != null) {
+            // Eyni məhsul varsa - quantity artır
+            int newQuantity = existing.getQuantity() + itemDto.getQuantity();
+            existing.setQuantity(newQuantity);
+
+            cartRepository.save(existing);
+        } else {
+            // Yeni cart item
+            Cart cart = new Cart();
+            cart.setUser(user);
+            cart.setProduct(product);
             cart.setImageUrl(itemDto.getImageUrl());
             cart.setQuantity(itemDto.getQuantity());
             cart.setPrice(itemDto.getPrice());
 
-            Product product = productRepository.findById(itemDto.getProductId())
-                    .orElseThrow(() -> new RuntimeException("Product not found with id: " + itemDto.getProductId()));
-            cart.setProduct(product);
-
-            Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-            String email = auth.getName(); // DƏYİŞDİ
-            User user = userRepository.findByEmail(email); // DƏYİŞDİ
-
-            if (user != null) {
-                cart.setUser(user);
-            } else {
-                throw new RuntimeException("User not found.");
-            }
-
             cartRepository.save(cart);
-            log.info("Cart item saved successfully: {}", cart);
-        } catch (Exception e) {
-            log.error("Error saving cart item: ", e);
         }
     }
 
@@ -75,14 +74,55 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void updateQuantity(Long productId, int quantity) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String username = auth.getName();
+        User user = userRepository.findByUsername(username);
+
+        List<Cart> cartItems = cartRepository.findAllByUserAndProductId(user, productId);
+
+        if (!cartItems.isEmpty()) {
+            Cart mainCart = cartItems.get(0);
+            mainCart.setQuantity(quantity);
+
+            cartRepository.save(mainCart);
+
+            // Əgər eyni məhsuldan birdən çox varsa, artıq olanları sil
+            for (int i = 1; i < cartItems.size(); i++) {
+                cartRepository.delete(cartItems.get(i));
+            }
+        }
+    }
+
+    @Override
+    public void removeFromCart(List<Long> productIds) {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth == null || !auth.isAuthenticated() || "anonymousUser".equals(auth.getPrincipal())) {
+            throw new RuntimeException("User is not authenticated.");
+        }
+
+        String username = auth.getName();
+        User user = userRepository.findByUsername(username);
+
+        for (Long productId : productIds) {
+            List<Cart> items = cartRepository.findAllByUserAndProductId(user, productId);
+            if (!items.isEmpty()) {
+                cartRepository.deleteAll(items);
+            }
+        }
+    }
+
+
+    @Override
     public List<CartItemDto> convertCartToView(List<CartDto> cartItems) {
         return cartItems.stream().map(item -> new CartItemDto(
-
+                item.getId(),
                 item.getId(),
                 item.getImageUrl(),
                 item.getQuantity(),
                 item.getPrice()
         )).collect(Collectors.toList());
     }
+
 
 }

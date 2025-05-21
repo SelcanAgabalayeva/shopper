@@ -56,7 +56,9 @@ public class HomeController {
     }
 
     @GetMapping("/checkout")
-    public String checkout() {
+    public String checkout(Model model) {
+        List<SliderDto> sliderDtoList=sliderService.getSlider();
+        model.addAttribute("sliders",sliderDtoList);
         return "checkout.html";
 
     }
@@ -69,6 +71,7 @@ public class HomeController {
     @GetMapping("/product_detail")
     public String product_detail(Model model) {
         List<ProductDto> featuredProducts = productService.getFeaturedProducts();
+
         model.addAttribute("featuredProducts", featuredProducts);
         return "product_detail.html";
 

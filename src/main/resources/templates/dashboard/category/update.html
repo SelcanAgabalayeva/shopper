@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/dashboard/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Category Update</title>
+</head>
+<body>
+<div layout:fragment="body">
+
+    <form th:action="@{'/admin/category/edit/' + ${category.id}}" method="post">
+        <div class="form-group">
+            <label>Kategoriya Adı:</label>
+            <input type="text" class="form-control" name="name" th:value="${category.name}" required/>
+        </div>
+
+        <!-- ID lazım olsa gizli input kimi -->
+        <input type="hidden" name="id" th:value="${category.id}"/>
+
+        <div class="form-group mt-2">
+            <input type="submit" class="btn btn-primary" value="Update"/>
+        </div>
+    </form>
+
+</div>
+</body>
+</html>

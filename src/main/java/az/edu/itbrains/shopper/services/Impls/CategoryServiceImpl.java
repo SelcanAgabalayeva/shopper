@@ -1,6 +1,9 @@
 package az.edu.itbrains.shopper.services.Impls;
 
-import az.edu.itbrains.shopper.dtos.CategoryNavbarDto;
+import az.edu.itbrains.shopper.dtos.category.CategoryCreateDto;
+import az.edu.itbrains.shopper.dtos.category.CategoryDashboardDto;
+import az.edu.itbrains.shopper.dtos.category.CategoryNavbarDto;
+import az.edu.itbrains.shopper.dtos.category.CategoryUpdateDto;
 import az.edu.itbrains.shopper.models.Category;
 import az.edu.itbrains.shopper.repositories.CategoryRepository;
 import az.edu.itbrains.shopper.services.CategoryService;
@@ -23,5 +26,40 @@ public class CategoryServiceImpl implements CategoryService {
         List<CategoryNavbarDto> categoryNavbarDtoList=categoryList.stream().map(category -> modelMapper.map(category, CategoryNavbarDto.class)).collect(Collectors.toList());
 
         return categoryNavbarDtoList;
+    }
+
+    @Override
+    public List<CategoryDashboardDto> getDashboardCategories() {
+        List<Category> categoryList=categoryRepository.findAll();
+        List<CategoryDashboardDto> categoryDashboardDtoList=categoryList.stream().map(x->modelMapper.map(x, CategoryDashboardDto.class)).collect(Collectors.toList());
+        return categoryDashboardDtoList;
+    }
+
+    @Override
+    public void createCategory(CategoryCreateDto categoryCreateDto) {
+        Category category = new Category();
+        category.setName(categoryCreateDto.getName());
+        categoryRepository.save(category);
+    }
+
+    @Override
+    public CategoryUpdateDto getUpdateCategory(Long id) {
+        Category category=categoryRepository.findById(id).orElseThrow();
+        CategoryUpdateDto categoryUpdateDto=modelMapper.map(category,CategoryUpdateDto.class);
+        return categoryUpdateDto;
+    }
+
+    @Override
+    public void updateCategory(Long id, CategoryUpdateDto categoryUpdateDto) {
+        Category category=categoryRepository.findById(id).orElseThrow();
+        category.setName(categoryUpdateDto.getName());
+        categoryRepository.save(category);
+    }
+
+    @Override
+    public void deleteCategory(Long id) {
+        Category findCategory=categoryRepository.findById(id).orElseThrow();
+        categoryRepository.delete(findCategory);
+
     }
 }

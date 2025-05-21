@@ -1,5 +1,6 @@
 package az.edu.itbrains.shopper.dtos;
 
+import az.edu.itbrains.shopper.dtos.category.CategoryDto;
 import lombok.*;
 
 import java.util.Date;
@@ -19,6 +20,11 @@ public class ProductDetailDto {
     private String productCode;
     private String rewardPoints;
     private String availability;
+    private String description;
+    private String size;
+    private String color;
+    private List<String> sizes;
+    private List<String> colours;
     private CategoryDto category;
     private BrandDto brand;
 

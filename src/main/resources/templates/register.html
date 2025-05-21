@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
       layout:decorate="~{layout}">
 <head>
     <title>Home</title>
@@ -8,16 +8,20 @@
 <body>
 <div layout:fragment="content">
     <section class="header_text sub">
-        <img class="pageBanner" src="/front/themes/images/pageBanner.png" alt="New products" >
-        <h4><span>Login or Regsiter</span></h4>
+        <th:block th:each="slider : ${sliders}" th:if="${slider.id == 2}">
+            <img class="pageBanner" th:src="@{${slider.imageUrl}}" alt="New products" style="width: 1200px; height: 400px;" >
+            <h4><span>Login or Regsiter</span></h4>
+        </th:block>
     </section>
+    <div class="container">
     <section class="main-content">
         <div class="row">
             <div class="span5">
                 <h4 class="title"><span class="text"><strong>Login</strong> Form</span></h4>
-                <form action="#"  method="post">
+                <form action="/login"  method="post">
                     <input type="hidden" name="next" value="/">
                     <fieldset>
+
                         <div class="control-group">
                             <label class="control-label">Username</label>
                             <div class="controls">
@@ -70,6 +74,7 @@
             </div>
         </div>
     </section>
+    </div>
 </div>
 </body>
 </html>

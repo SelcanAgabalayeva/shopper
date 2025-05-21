@@ -1,11 +1,9 @@
 package az.edu.itbrains.shopper.dtos;
 
-import az.edu.itbrains.shopper.models.Brand;
-import az.edu.itbrains.shopper.models.Category;
+import az.edu.itbrains.shopper.dtos.category.CategoryDto;
 import lombok.*;
 
 import java.util.Date;
-import java.util.List;
 
 @Getter
 @Setter

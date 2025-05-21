@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+<div layout:fragment="body">
+    <a th:href="@{/admin/checkout/create}" class="btn btn-outline-success">Create</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">FirstName</th>
+            <th scope="col">LastName</th>
+            <th scope="col">Email</th>
+            <th scope="col">Telephone</th>
+            <th scope="col">Company</th>
+            <th scope="col">Comment</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="checkout , data : ${checkouts}" >
+            <th th:text="${data.index+1}" scope="row">1</th>
+            <td th:text="${checkout.firstName}">Mark</td>
+            <td th:text="${checkout.lastName}">Mark</td>
+            <td th:text="${checkout.email}">Mark</td>
+            <td th:text="${checkout.telephone}">Mark</td>
+            <td th:text="${checkout.company}">Mark</td>
+            <td th:text="${checkout.comment}">Mark</td>
+            <td>
+                <a th:href="'/admin/checkout/update/'+${checkout.id}" class="btn btn-outline-warning">update</a>
+                <a th:href="'/admin/checkout/delete/'+${checkout.id}" class="btn btn-outline-danger">delete</a>
+            </td>
+        </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

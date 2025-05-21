@@ -8,9 +8,13 @@
 <body>
 <div layout:fragment="content">
   <section class="header_text sub">
-    <img class="pageBanner" src="/front/themes/images/pageBanner.png" alt="New products" >
+    <th:block th:each="slider : ${sliders}" th:if="${slider.id == 2}">
+    <img class="pageBanner" th:src="@{${slider.imageUrl}}" alt="New products" style="width: 1200px; height: 400px;" >
     <h4><span>Product Detail</span></h4>
+    </th:block>
   </section>
+
+  <div class="container">
   <section class="main-content">
     <div class="row">
       <div class="span9">
@@ -51,22 +55,41 @@
         <div class="row">
           <div class="span9">
             <ul class="nav nav-tabs" id="myTab">
-              <li class="active"><a href="#home">Description</a></li>
-              <li class=""><a href="#profile">Additional Information</a></li>
+              <li class="active"><a href="#home"  data-toggle="tab">Description</a></li>
+              <li class=""><a href="#profile"  data-toggle="tab">Additional Information</a></li>
             </ul>
             <div class="tab-content">
-              <div class="tab-pane active" id="home">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem</div>
+              <div class="tab-pane active" id="home" th:text="${product.description}">Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem</div>
               <div class="tab-pane" id="profile">
                 <table class="table table-striped shop_attributes">
                   <tbody>
                   <tr class="">
                     <th>Size</th>
-                    <td>Large, Medium, Small, X-Large</td>
+                    <td>
+                      <span th:each="size : ${product.sizes}" th:text="${size} + ', '" />
+                      <select name="selectedSize" style="margin-left: 10px;">
+                        <option th:each="size : ${product.sizes}"
+                                th:value="${size}"
+                                th:text="${size}">
+                        </option>
+                      </select>
+                    </td>
+
                   </tr>
+
                   <tr class="alt">
                     <th>Colour</th>
-                    <td>Orange, Yellow</td>
+                    <td>
+                      <span th:text="${#strings.arrayJoin(product.colours, ', ')}">Orange, Yellow</span>
+                      <select name="selectedColour" style="margin-left: 2em;">
+                        <option th:each="colour : ${product.colours}"
+                                th:value="${colour}"
+                                th:text="${colour}">
+                        </option>
+                      </select>
+                    </td>
                   </tr>
+
                   </tbody>
                 </table>
               </div>
@@ -81,10 +104,10 @@
 									</span>
             </h4>
             <div id="myCarousel-1" class="carousel slide">
-              <div class="carousel-inner">
+              <div  class="carousel-inner">
                 <div class="active item">
                   <ul class="thumbnails listing-products">
-                    <th:block th:each="product, iterStat : ${featuredProducts}">
+                    <th:block th:each="product, iterStat : ${related}">
                       <th:block th:if="${iterStat.index < 3}">
                     <li class="span3">
                       <div class="product-box">
@@ -102,7 +125,7 @@
                 </div>
                 <div class="item">
                   <ul class="thumbnails listing-products">
-                    <th:block th:each="product, iterStat : ${featuredProducts}">
+                    <th:block th:each="product, iterStat : ${related}">
                       <th:block th:if="${iterStat.index >= 3 && iterStat.index < 6}">
                     <li class="span3">
                       <div class="product-box">
@@ -213,6 +236,7 @@
 
 
 
+</div>
 </div>
 </body>
 </html>

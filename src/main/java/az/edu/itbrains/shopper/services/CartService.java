@@ -11,4 +11,10 @@ public interface CartService {
     void addToCart(CartItemDto itemDto);
     List<Cart> getAllCartItems();
 
+
+    void updateQuantity(Long productId, int quantity);
+
+
+    void removeFromCart(List<Long> productIds);
+
 }

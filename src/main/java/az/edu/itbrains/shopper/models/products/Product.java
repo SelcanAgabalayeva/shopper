@@ -7,6 +7,7 @@ import lombok.*;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,6 +25,11 @@ public class Product {
     private String rewardPoints;
     private String availability;
     private String imageUrl;
+    private String description;
+    private String size;
+    private String color;
+    private List<String> sizes;
+    private List<String> colours;
     private boolean isFeatured;
     private Date createdDate;
     @ManyToOne

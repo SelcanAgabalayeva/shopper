@@ -8,9 +8,12 @@
 <body>
 <div layout:fragment="content">
     <section class="header_text sub">
-        <img class="pageBanner" src="/front/themes/images/pageBanner.png" alt="New products" >
+        <th:block th:each="slider : ${sliders}" th:if="${slider.id == 2}">
+        <img class="pageBanner" th:src="@{${slider.imageUrl}}"  alt="New products"   style="width: 1200px; height: 400px;" >
         <h4><span>New products</span></h4>
+        </th:block>
     </section>
+    <div class="container">
     <section class="main-content">
 
         <div class="row">
@@ -66,37 +69,62 @@
                     </h4>
                     <div id="myCarousel" class="carousel slide">
                         <div class="carousel-inner">
-                            <div class="active item">
+
+                            <div class="active item" th:if="${featuredProducts.size() > 3}">
                                 <ul class="thumbnails listing-products">
-                                    <li class="span3">
-                                        <div class="product-box">
+                                    <li class="span3" th:if="${featuredProducts.size() > 3}">
+                                        <div class="product-box" th:object="${featuredProducts.get(3)}">
                                             <span class="sale_tag"></span>
-                                            <img alt="" src="/front/themes/images/ladies/1.jpg"><br/>
-                                            <a href="/product_detail" class="title">Fusce id molestie massa</a><br/>
-                                            <a href="#" class="category">Suspendisse aliquet</a>
-                                            <p class="price">$261</p>
+                                            <a th:href="@{'/products/detail/' + *{id}}">
+                                                <img th:src="@{*{imageUrl}}" alt="" />
+                                            </a><br/>
+                                            <a th:href="@{'/products/detail/' + *{id}}" class="title" th:text="*{title}">Title</a><br/>
+                                            <a href="#" class="category" th:text="*{category.name}">Category</a>
+                                            <p class="price" th:text="'$' + *{price}">$0</p>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
-                            <div class="item">
+
+                            <div class="item" th:if="${featuredProducts.size() > 4}">
                                 <ul class="thumbnails listing-products">
                                     <li class="span3">
-                                        <div class="product-box">
-                                            <img alt="" src="/front/themes/images/ladies/2.jpg"><br/>
-                                            <a href="/product_detail" class="title">Tempor sem sodales</a><br/>
-                                            <a href="#" class="category">Urna nec lectus mollis</a>
-                                            <p class="price">$134</p>
+                                        <div class="product-box" th:object="${featuredProducts.get(4)}">
+                                            <span class="sale_tag"></span>
+                                            <a th:href="@{'/products/detail/' + *{id}}">
+                                                <img th:src="@{*{imageUrl}}" alt="" />
+                                            </a><br/>
+                                            <a th:href="@{'/products/detail/' + *{id}}" class="title" th:text="*{title}">Title</a><br/>
+                                            <a href="#" class="category" th:text="*{category.name}">Category</a>
+                                            <p class="price" th:text="'$' + *{price}">$0</p>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
+
+                            <div class="item" th:if="${featuredProducts.size() > 5}">
+                                <ul class="thumbnails listing-products">
+                                    <li class="span3">
+                                        <div class="product-box" th:object="${featuredProducts.get(5)}">
+                                            <span class="sale_tag"></span>
+                                            <a th:href="@{'/products/detail/' + *{id}}">
+                                                <img th:src="@{*{imageUrl}}" alt="" />
+                                            </a><br/>
+                                            <a th:href="@{'/products/detail/' + *{id}}" class="title" th:text="*{title}">Title</a><br/>
+                                            <a href="#" class="category" th:text="*{category.name}">Category</a>
+                                            <p class="price" th:text="'$' + *{price}">$0</p>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    </div>
 </div>
 </body>
 </html>

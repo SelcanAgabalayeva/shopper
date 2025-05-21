@@ -1,9 +1,7 @@
 package az.edu.itbrains.shopper.services.Impls;
 
-import az.edu.itbrains.shopper.dtos.BrandDto;
-import az.edu.itbrains.shopper.dtos.CategoryDto;
-import az.edu.itbrains.shopper.dtos.ProductDetailDto;
-import az.edu.itbrains.shopper.dtos.ProductDto;
+import az.edu.itbrains.shopper.dtos.*;
+import az.edu.itbrains.shopper.dtos.category.CategoryDto;
 import az.edu.itbrains.shopper.models.products.Product;
 import az.edu.itbrains.shopper.repositories.ProductRepository;
 import az.edu.itbrains.shopper.services.ProductService;
@@ -83,6 +81,14 @@ public class ProductServiceImpl implements ProductService {
 }
 
     @Override
+    public List<Product> findAll() {
+
+            return productRepository.findAll();
+
+
+    }
+
+    @Override
     public ProductDetailDto getProductDetail(Long id) {
         Product product=productRepository.findById(id).orElseThrow();
         ProductDetailDto productDetailDto=modelMapper.map(product,ProductDetailDto.class);
@@ -113,6 +119,13 @@ public class ProductServiceImpl implements ProductService {
     public Product findById(Long id) {
         return productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
+    }
+
+    @Override
+    public List<ProductRelatedDto> getProductRelated() {
+        List<Product> products=productRepository.findAll();
+        List<ProductRelatedDto> relatedDtos=products.stream().map(product -> modelMapper.map(product, ProductRelatedDto.class)).collect(Collectors.toList());
+        return relatedDtos;
     }
 
 
