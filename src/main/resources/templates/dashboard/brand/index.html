@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{dashboard/layout}">
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+<div layout:fragment="body">
+    <a class="btn btn-success" href="/admin/brand/create">Create</a>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Ad</th>
+            <th scope="col">Image</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="brand , data : ${brands}">
+            <th th:text="${data.index+1}" scope="row">1</th>
+            <td th:text="${brand.name}">Mark</td>
+            <td>
+                <img width="50" height="50" th:src="${brand.imageUrl}" >
+            </td>
+            <td>
+                <a class="btn btn-warning" th:href="'/admin/brand/edit/'+${brand.id}">Edit</a>
+                <a class="btn btn-danger" th:href="'/admin/brand/delete/'+${brand.id}">Remove</a>
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

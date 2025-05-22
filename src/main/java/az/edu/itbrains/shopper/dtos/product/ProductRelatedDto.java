@@ -1,4 +1,4 @@
-package az.edu.itbrains.shopper.dtos;
+package az.edu.itbrains.shopper.dtos.product;
 
 import az.edu.itbrains.shopper.dtos.category.CategoryDto;
 import lombok.AllArgsConstructor;

@@ -1,7 +1,9 @@
-package az.edu.itbrains.shopper.dtos;
+package az.edu.itbrains.shopper.dtos.product;
 
-import az.edu.itbrains.shopper.dtos.category.CategoryDto;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
@@ -10,22 +12,20 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class ProductDetailDto {
+public class ProductDashboardDto {
     private Long id;
     private String title;
     private double price;
-    private String imageUrl;
-    private boolean isFeatured;
-    private Date createdDate;
     private String productCode;
     private String rewardPoints;
     private String availability;
+    private String imageUrl;
     private String description;
     private String size;
     private String color;
     private List<String> sizes;
     private List<String> colours;
-    private CategoryDto category;
-    private BrandDto brand;
 
+    private boolean isFeatured;
+    private Date createdDate;
 }

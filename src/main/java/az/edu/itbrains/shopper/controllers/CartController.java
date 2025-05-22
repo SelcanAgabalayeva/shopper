@@ -1,6 +1,6 @@
 package az.edu.itbrains.shopper.controllers;
 
-import az.edu.itbrains.shopper.dtos.BrandDto;
+import az.edu.itbrains.shopper.dtos.brand.BrandDto;
 import az.edu.itbrains.shopper.dtos.CartDto;
 import az.edu.itbrains.shopper.dtos.CartItemDto;
 import az.edu.itbrains.shopper.dtos.SliderDto;
@@ -20,7 +20,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 

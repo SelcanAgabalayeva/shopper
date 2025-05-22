@@ -1,8 +1,8 @@
 package az.edu.itbrains.shopper.controllers;
 
-import az.edu.itbrains.shopper.dtos.BrandDto;
+import az.edu.itbrains.shopper.dtos.brand.BrandDto;
 import az.edu.itbrains.shopper.dtos.FeatureBoxDto;
-import az.edu.itbrains.shopper.dtos.ProductDto;
+import az.edu.itbrains.shopper.dtos.product.ProductDto;
 import az.edu.itbrains.shopper.dtos.SliderDto;
 import az.edu.itbrains.shopper.services.BrandService;
 import az.edu.itbrains.shopper.services.FeatureBoxService;
@@ -12,7 +12,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 

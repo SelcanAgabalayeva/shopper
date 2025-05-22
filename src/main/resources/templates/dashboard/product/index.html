@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html
+        xmlns:th="http://thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{/dashboard/layout}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body >
+<div layout:fragment="body">
+    <a th:href="@{/admin/product/create}" class="btn btn-outline-success">Create</a>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Title</th>
+            <th scope="col">Price</th>
+            <th scope="col">ProductCode</th>
+            <th scope="col">RewardPoints</th>
+            <th scope="col">Availability</th>
+            <th scope="col">ImageUrl</th>
+            <th scope="col">isFeatured</th>
+
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product , data : ${products}" >
+            <th th:text="${data.index+1}" scope="row">1</th>
+            <td th:text="${product.title}">Mark</td>
+            <td th:text="${product.price}">Mark</td>
+            <td th:text="${product.productCode}">Mark</td>
+            <td th:text="${product.rewardPoints}">Mark</td>
+            <td th:text="${product.availability}">Mark</td>
+            <td>
+                <img width="50" height="50" th:src="${product.imageUrl}" >
+            </td>
+            <td th:text="${product.isFeatured}">Mark</td>
+
+            <td>
+                <a th:href="'/admin/product/edit/'+${product.id}" class="btn btn-outline-warning">update</a>
+                <a th:href="'/admin/product/delete/'+${product.id}" class="btn btn-outline-danger">delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

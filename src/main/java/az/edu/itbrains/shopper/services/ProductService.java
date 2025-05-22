@@ -1,8 +1,6 @@
 package az.edu.itbrains.shopper.services;
 
-import az.edu.itbrains.shopper.dtos.ProductDetailDto;
-import az.edu.itbrains.shopper.dtos.ProductDto;
-import az.edu.itbrains.shopper.dtos.ProductRelatedDto;
+import az.edu.itbrains.shopper.dtos.product.*;
 import az.edu.itbrains.shopper.models.products.Product;
 
 import java.util.List;
@@ -18,4 +16,16 @@ public interface ProductService {
     Product findById(Long id);
 
     List<ProductRelatedDto> getProductRelated();
+
+    List<ProductDashboardDto> getProductAll();
+
+    void createProduct(ProductCreateDto productCreateDto);
+
+
+    ProductUpdateDto getUpdateProduct(Long id);
+
+    void updateProduct(Long id, ProductUpdateDto productUpdateDto);
+
+    void deleteProduct(Long id);
+
 }

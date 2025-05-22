@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" xmlns:th="http://www.w3.org/1999/xhtml"
+      layout:decorate="~{dashboard/layout}">
+<head>
+    <title>Home</title>
+</head>
+
+<body>
+<div layout:fragment="body">
+
+    <form method="post">
+        <input name="name" type="text" th:value="${brand.name}">
+        <input name="imageUrl" type="text" th:value="${brand.imageUrl}">
+        <input type="submit" class="btn btn-warning" value="Update">
+
+    </form>
+</div>
+</body>
+</html>

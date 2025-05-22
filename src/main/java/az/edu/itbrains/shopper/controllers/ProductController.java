@@ -1,6 +1,10 @@
 package az.edu.itbrains.shopper.controllers;
 
 import az.edu.itbrains.shopper.dtos.*;
+import az.edu.itbrains.shopper.dtos.brand.BrandDto;
+import az.edu.itbrains.shopper.dtos.product.ProductDetailDto;
+import az.edu.itbrains.shopper.dtos.product.ProductDto;
+import az.edu.itbrains.shopper.dtos.product.ProductRelatedDto;
 import az.edu.itbrains.shopper.models.products.Product;
 import az.edu.itbrains.shopper.services.BrandService;
 import az.edu.itbrains.shopper.services.ProductService;
