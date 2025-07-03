@@ -9,6 +9,7 @@ import az.edu.itbrains.shopper.repositories.CategoryRepository;
 import az.edu.itbrains.shopper.services.CategoryService;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,9 +31,11 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public List<CategoryDashboardDto> getDashboardCategories() {
-        List<Category> categoryList=categoryRepository.findAll();
-        List<CategoryDashboardDto> categoryDashboardDtoList=categoryList.stream().map(x->modelMapper.map(x, CategoryDashboardDto.class)).collect(Collectors.toList());
-        return categoryDashboardDtoList;
+        return categoryRepository
+                .findAll(Sort.by(Sort.Direction.ASC, "id"))   //
+                .stream()
+                .map(cat -> modelMapper.map(cat, CategoryDashboardDto.class))
+                .toList();
     }
 
     @Override

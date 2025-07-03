@@ -39,7 +39,7 @@ public class ProductsController {
     @GetMapping("/admin/product/create")
     public String create(Model model) {
         model.addAttribute("product", new ProductCreateDto());
-        model.addAttribute("brands", brandService.getAllBrands()); // brands siyahısı form üçün
+        model.addAttribute("brands", brandService.getAllBrands());
         model.addAttribute("categories", categoryService.getNavbarCategories());
         return "/dashboard/product/create";
     }

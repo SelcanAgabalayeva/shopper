@@ -11,6 +11,7 @@ import az.edu.itbrains.shopper.repositories.CategoryRepository;
 import az.edu.itbrains.shopper.repositories.ProductRepository;
 import az.edu.itbrains.shopper.services.ProductService;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -75,7 +76,7 @@ public class ProductServiceImpl implements ProductService {
                         product.getRewardPoints(),
                         product.getAvailability(),
 
-                        new CategoryDto( // Category obyektindən CategoryDto yarat
+                        new CategoryDto(
                                 product.getCategory().getId(),
                                 product.getCategory().getName()
                         ),
@@ -139,7 +140,11 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public List<ProductDashboardDto> getProductAll() {
-        List<ProductDashboardDto> result=productRepository.findAll().stream().map(products->modelMapper.map(products,ProductDashboardDto.class)).collect(Collectors.toList());
+        List<ProductDashboardDto> result = productRepository
+                .findAll(Sort.by(Sort.Direction.ASC, "id"))
+                .stream()
+                .map(p -> modelMapper.map(p, ProductDashboardDto.class))
+                .toList();
         return result;
     }
 
@@ -154,7 +159,7 @@ public class ProductServiceImpl implements ProductService {
         product.setAvailability(productCreateDto.getAvailability());
         product.setImageUrl(productCreateDto.getImageUrl());
         product.setFeatured(productCreateDto.isFeatured());
-        Brand brand = brandRepository.findById(productCreateDto.getBrandId()) // <-- Buradakı dto
+        Brand brand = brandRepository.findById(productCreateDto.getBrandId())
                 .orElseThrow(() -> new RuntimeException("Brand not found"));
         product.setBrand(brand);
         Category category = categoryRepository.findById(productCreateDto.getCategoryId())

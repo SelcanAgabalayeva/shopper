@@ -3,7 +3,7 @@ package az.edu.itbrains.shopper.controllers;
 import az.edu.itbrains.shopper.dtos.brand.BrandDto;
 import az.edu.itbrains.shopper.dtos.CartDto;
 import az.edu.itbrains.shopper.dtos.CartItemDto;
-import az.edu.itbrains.shopper.dtos.SliderDto;
+import az.edu.itbrains.shopper.dtos.slider.SliderDto;
 import az.edu.itbrains.shopper.models.Cart;
 import az.edu.itbrains.shopper.models.User;
 import az.edu.itbrains.shopper.models.products.Product;

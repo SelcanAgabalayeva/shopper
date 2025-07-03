@@ -13,7 +13,7 @@
                 <ul class="slides">
                     <th:block th:each="slider : ${sliders}">
                         <li>
-                            <img th:src="@{${slider.imageUrl}}" alt=""/>
+                            <img th:src="@{${slider.imageUrl}}" alt="" style="height: 480px;" />
                             <div class="intro" th:if="${slider.title != null}">
                                 <h1 th:text="${slider.title}"></h1>
                                 <p><span th:text="${slider.subtitle}"></span></p>
@@ -145,7 +145,7 @@
         <h4 class="title"><span class="text">Manufactures</span></h4>
         <div class="row">
             <div class="span2" th:each="brand : ${brands}">
-                <a href="#"><img alt="" th:src="${brand.imageUrl}"></a>
+                <a th:href="@{'/products/brand/' + ${brand.id}}" ><img alt="" th:src="${brand.imageUrl}"></a>
             </div>
 
         </div>

@@ -9,6 +9,7 @@
 <div layout:fragment="body">
 
   <form th:action="@{/admin/product/edit/{id}(id=${product.id})}" th:object="${product}" method="post">
+
     <label>Title:</label>
     <input type="text" th:field="*{title}" placeholder="Title" required/><br>
     <label>Price:</label>

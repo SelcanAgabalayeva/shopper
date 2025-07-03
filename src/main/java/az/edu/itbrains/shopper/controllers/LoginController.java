@@ -1,7 +1,7 @@
 package az.edu.itbrains.shopper.controllers;
 
 import az.edu.itbrains.shopper.dtos.RegisterDto;
-import az.edu.itbrains.shopper.dtos.SliderDto;
+import az.edu.itbrains.shopper.dtos.slider.SliderDto;
 import az.edu.itbrains.shopper.services.SliderService;
 import az.edu.itbrains.shopper.services.UserService;
 import lombok.RequiredArgsConstructor;

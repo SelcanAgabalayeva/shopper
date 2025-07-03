@@ -27,7 +27,10 @@
         </thead>
         <tbody>
         <tr th:each="product , data : ${products}" >
-            <th th:text="${data.index+1}" scope="row">1</th>
+            <th>
+                <span th:text="${data.index+1}">#</span>
+            </th>
+
             <td th:text="${product.title}">Mark</td>
             <td th:text="${product.price}">Mark</td>
             <td th:text="${product.productCode}">Mark</td>

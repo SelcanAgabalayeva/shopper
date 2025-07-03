@@ -1,13 +1,15 @@
-package az.edu.itbrains.shopper.dtos;
+package az.edu.itbrains.shopper.dtos.slider;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SliderDto {
+public class SliderDashboardDto {
     private Long id;
     private String imageUrl;
     private String title;

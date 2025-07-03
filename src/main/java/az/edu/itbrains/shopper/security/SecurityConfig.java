@@ -29,24 +29,23 @@ public class SecurityConfig {
                 .csrf(c -> c.disable())
                 .authorizeHttpRequests((c) -> c
                         .requestMatchers(HttpMethod.POST, "/cart").authenticated()
+                        .requestMatchers("/admin").authenticated() // <-- BURADA
                         .anyRequest().permitAll()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
                         .failureUrl("/login")
                         .failureForwardUrl("/login")
-
-
                 )
-
                 .exceptionHandling(exception -> exception
                         .accessDeniedHandler(((request, response, accessDeniedException) ->
                                 response.sendRedirect("/login")
-                        )))
+                        ))
+                )
                 .logout((log) -> log.logoutSuccessUrl("/login"));
 
-
         return http.build();
+
 
 
     }

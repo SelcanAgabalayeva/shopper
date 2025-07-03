@@ -1,8 +1,6 @@
 package az.edu.itbrains.shopper.services.Impls;
 
 import az.edu.itbrains.shopper.dtos.FeatureBoxDto;
-import az.edu.itbrains.shopper.dtos.SliderDto;
-import az.edu.itbrains.shopper.models.Slider;
 import az.edu.itbrains.shopper.repositories.FeatureBoxRepository;
 import az.edu.itbrains.shopper.services.FeatureBoxService;
 import org.modelmapper.ModelMapper;
